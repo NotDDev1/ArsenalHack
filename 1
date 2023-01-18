@@ -4,8 +4,16 @@ local Window = OrionLib:MakeWindow({Name = "DEWHUB - Arsenal", IntroEnabled = fa
 
 --Values
 
+_G.RandomSpawn = true
 
 --Functions
+
+function RandomSpawn()
+while _G.RandomSpawn == true do
+game:GetService("ReplicatedStorage").Events.SpawnMe:FireServer()
+wait(10)
+	end
+end
 
 function aimbot()
 local UIS = game:GetService("UserInputService")
@@ -144,10 +152,27 @@ function NewWindow()
 	})
 end
 
+local PlayerTab = Window2:MakeTab({
+	Name = "LocalPlayer",
+	Icon = "",
+	PremiumOnly = false
+})
+
+PlayerTab:AddToggle({
+	Name = "RandomSpawn",
+	Default = false,
+	Callback = function(Value)
+		_G.RandomSpawn = Value
+			RandomSpawn()
+	end
+})
+
+PlayerTab:AddLabel("RandomSpawn spawns you in a random spawn")
+PlayerTab:AddLabel("every 10 seconds")
 
 --strings
 
-local key = "DewHub_-official94"
+local key = "DewHub_-official94test"
 
 --Tabs
 
